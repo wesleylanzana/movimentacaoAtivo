@@ -1,0 +1,221 @@
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="/style-guide/css/fluig-style-guide.min.css"/>
+    <script type="text/javascript" src="/portal/resources/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/portal/resources/js/mustache/mustache-min.js"></script>
+    <script type="text/javascript" src="/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/webdesk/vcXMLRPC.js"></script> <!--Lib para chamada de dataset interno-->
+    <script type="text/javascript" src="./buscaCep.js"></script>
+    <script type="text/javascript" src="./buscaLogin.js"></script>
+    <script type="text/javascript" src="./custom.js"></script>
+    <script type="text/javascript" src="mascaraMonetaria.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="fluig-style-guide">
+<form name="form" id="form" role="form">
+
+    <div class='form-group'>
+        <p id="logo">
+            <img src="./img/logo.jpg" alt="logo">
+        </p>
+
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="collapse-icon up" id="tituloRemetente" data-toggle="collapse" data-parent="#accordion" href="#dadosRemetente">
+                        Dados do Remetente   <i class="flaticon flaticon-product icon-md" aria-hidden="true"></i>
+                        </a>
+                    </h4>
+                </div>
+                <div id="dadosRemetente" class="panel-collapse collapse in">
+                    <div class="panel-body">
+
+                        <div class='row'>
+                            <div class='col-md-3'>
+                                <label for="unidadeDeOrigem">Unidade de Origem</label>
+                                <select class="form-control" name='unidadeDeOrigem' id='unidadeDeOrigem'>
+                                    <option value="SPsaopaulo">SP - São Paulo</option>
+                                    <option value="SCjoinville">Santa Catarina - Joinville</option>
+                                    <option value="BAsalvador">Bahia - Salvador</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="dataEnvio">Data de envio</label>
+                                <input type="date" class='form-control' name="dataEnvio" id="dataEnvio">
+                            </div>
+                
+                            <div class="col-md-3">
+                                <label for="despachante">Despachante</label>
+                                <input type="zoom" class="form-control" id = "selecionaDespachante" name="selecionaDespachante"
+                                    data-zoom="{
+                                        'displayKey':'colleagueName',
+                                        'datasetId':'colleague',
+                                        'maximumSelectionLength':'1',
+                                        'placeholder':'Escolha o usuário',
+                                        'fields':[
+                                            {
+                                            'field':'colleagueName',
+                                            'label':'Nome',
+                                            'standard':'true'
+                                            }
+                
+                                        ]
+                                    }"
+                                />
+                            </div>
+                            
+                            <div class='col-md-3'>
+                                <label for="idmov">Id do movimento</label>
+                                <input type="text" class="form-control" name="idmov" id="idmov" placeholder="idmov" onblur="teste()">
+                            </div>
+
+                            <div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="collapse-icon up" id="tituloCliente" data-toggle="collapse" data-parent="#accordion" href="#dadosCliente">
+                        Dados do cliente  <i class="flaticon flaticon-person-refresh icon-md" aria-hidden="true"></i>
+                        </a>
+                    </h4>
+                </div>
+                <div id="dadosCliente" class="panel-collapse collapse in">
+                    <div class="panel-body">
+
+                        <div class='row'>
+                            <div class='col-md-3'>
+                                <label for="cpf">Login</label>
+                                <input type="text" class='form-control' name="login" id="login" onblur="buscaLogin()">
+                            </div>
+
+                            <div class='col-md-3'>
+                                <label for="nome">Nome</label>
+                                <input type="text" class='form-control' name="nome" id="nome" readonly>
+                            </div>
+
+                            <div class='col-md-3'>
+                                <label for="dataDeNascimento">Data de nascimento</label>
+                                <input type="date" class='form-control' name="dataDeNascimento" id="dataDeNascimento">
+                            </div>
+
+                            <div class='col-md-3'>
+                                <label for="genero">Sexo:</label>
+                                <select class='form-control' name="genero" id="genero">
+                                    <option value="masculino">Masculino</option>
+                                    <option value="feminino">Feminino</option>
+                                    <option value="outro">Outro</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class='row'>
+                            <div class='col-md-3'>
+                                <label for="cep">Cep</label>
+                                <input type="number" class="form-control" name="cep" id="cep" onblur="buscaCep()">
+                            </div>
+
+                            <div class='col-md-6'>
+                                <label for="logradouro">Logradouro</label>
+                                <input type="text" class="form-control" name="logradouro" id="logradouro" readonly>
+                            </div>
+
+                            <div class='col-md-3'>
+                                <label for="complemento">Complemento</label>
+                                <input type="text" class="form-control" name="complemento" id="complemento">
+                            </div>
+                        </div>
+
+                        <div class='row'>
+                            <div class='col-md-3'>
+                                <label for="localidade">Localidade</label>
+                                <input type="text" class="form-control" name="localidade" id="localidade" readonly>
+                            </div>
+
+                            <div class='col-md-6'>
+                                <label for="bairro">Bairro</label>
+                                <input type="text" class="form-control" name="bairro" id="bairro" readonly>
+                            </div>
+
+                            <div class='col-md-3'>
+                                <label for="uf">UF</label>
+                                <input type="text" class="form-control" name="uf" id="uf" readonly>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="collapse-icon up" id="itens" data-toggle="collapse" data-parent="#accordion" href="#itensDaCompra">
+                        Itens da Compra <i class="fluigicon fluigicon-shopping-cart icon-md" aria-hidden="true"></i>
+                        </a>
+                    </h4>
+                </div>
+
+                <div id="itensDaCompra" class="panel-collapse collapse in">
+                    <div class="panel-body">
+
+                        <div class='row'>
+                            <div class="col-md-12">
+                                <table tablename="resumoProdutos" class="table" id="resumoProdutos" addbuttonlabel="Adicionar Itens" addbuttonclass="btn btn-info">
+                                    <thead>
+                                        <tr>														
+                                            <th>Id</th>
+                                            <th>Item Descrição</th>
+                                            <th>Quantidade</th>
+                                            <th>Valor Unitário</th>
+                                            <th>Imagem do Produto</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class='col-md-2'>
+                                                <input type="number" class="form-control" name="idProduto" id="idProduto" min=0>
+                                            </td>
+                                            <td class='col-md-4'>
+                                                <input type="text" class="form-control" name="itemDescricao" id="itemDescricao">
+                                            </td>
+                                            <td class='col-md-2'>
+                                                <input type="number" class="form-control" name="quantidadeItem" id="quantidadeItem" min=1>
+                                            </td>
+                                            <td class='col-md-2'>
+                                                <input type="number" class="form-control" name="valorUnitario" id="valorUnitario" placeholder="R$ 0,00" onblur="valorMonetario()">
+                                            </td>
+                                            <td class="col-md-2">
+                                                <input type="file" class='btn btn-primary' name="imagemProduto" id="imagemProduto" >
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>	
+
+    </div>
+</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+
+img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+
+div.row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+/*
+table#resumoProdutos.table.table-striped{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }*/

@@ -1,0 +1,17 @@
+{
+	"version": "1.0.0",
+	"configurations": [
+		{
+			"id": "2gmq7bhmvmlwpf9qrec68ekb1guy6",
+			"name": "Atendimento - BPM",
+			"host": "atendimento.fluig.com",
+			"ssl": true,
+			"port": 443,
+			"username": "admin",
+			"password": "eyJpdiI6IjhmMDM2OWM1ZDNjOWU0YTFkZmNiNWYzZDMyODUzYTNiIiwic2FsdCI6IjA0Mzc0ZmQ5YWJjM2E0MTRlZjY4ZTViMjFjMjJlMTE2IiwidGV4dCI6IjE5MmI1YTM1NzZhYmNiOGNlZjE1ZTQwN2M2MTQzYzU1In0=",
+			"userCode": "admin",
+			"confirmExporting": false,
+			"companyId": 1
+		}
+	]
+}
